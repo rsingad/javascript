@@ -81,7 +81,7 @@ let images = [
     productname: "sport",
     prize: 799,
     photo:
-    "https://th.bing.com/th/id/OIP.H-6bVtU0CS4-0SIYqOBLFQHaHa?rs=1&pid=ImgDetMain",
+      "https://th.bing.com/th/id/OIP.H-6bVtU0CS4-0SIYqOBLFQHaHa?rs=1&pid=ImgDetMain",
   },
   {
     categary: "shoes",
@@ -101,8 +101,7 @@ let images = [
     categary: "home",
     productname: "2bhk kothi",
     prize: 80000,
-    photo:
-      "https://happho.com/wp-content/uploads/2022/07/image01.jpg",
+    photo: "https://happho.com/wp-content/uploads/2022/07/image01.jpg",
   },
   {
     categary: "home",
@@ -119,7 +118,7 @@ let images = [
       "https://th.bing.com/th/id/OIP.YconY4asGiQzIBk1IPxIsgAAAA?rs=1&pid=ImgDetMain",
   },
 ];
-let myCard=(items)=>(`
+let myCard = (items) => `
 <div class="card">
     <div class="cardimg">
       <img
@@ -132,8 +131,32 @@ let myCard=(items)=>(`
         <h2><sup><code></code>$</sup>${items.prize}</h2>
     </div>
   </div>
-`);
+`;
 let main = document.querySelector("#main");
-images.forEach((item, index) => {
-  main.innerHTML +=myCard(item);
+let allbtn = document.querySelectorAll("header ul li button");
+function showResult(filteredata) {
+  main.innerHTML = "";
+  filteredata.forEach((item) => {
+    main.innerHTML += myCard(item);
+  });
+}
+function filterFunc(e) {
+  console.log(e.target);
+  let filteredArr = images.filter((item) => item.categary == e.target.innerHTML);
+  showResult(filteredArr);
+}
+allbtn.forEach((btnNo) => {
+  btnNo.addEventListener("click", (e) => {
+    if(e.target.innerHTML=="all"){
+      main.innerHTML="";
+      showResult(images);//pass all data in arr
+    }
+    else{
+      filterFunc(e);
+    }
+  });
+});
+
+images.forEach((item) => {
+  main.innerHTML += myCard(item);
 });
