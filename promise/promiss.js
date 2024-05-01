@@ -1,0 +1,1 @@
+const promissOne =new Promiss();
